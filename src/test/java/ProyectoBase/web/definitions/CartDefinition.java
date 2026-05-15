@@ -5,12 +5,13 @@ import static org.junit.Assert.assertTrue;
 
 import ProyectoBase.base.ScenarioContext;
 import ProyectoBase.web.pages.CartPage;
+import ProyectoBase.web.pages.LoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class CartDefinition extends BaseDefinitions {
-
+    LoginPage loginPage;
     CartPage cartPage;
 
     public CartDefinition(ScenarioContext context) {
@@ -54,4 +55,43 @@ public class CartDefinition extends BaseDefinitions {
     public void el_carrito_deberia_estar_vacio() {
         assertTrue("El carrito no esta vacio", cartPage.carritoEstaVacio());
     }
+
+    @And("voy al Checkout")
+    public void ingresar_a_Checkout() throws Exception {
+        cartPage.irAlCheckout();
+    }
+
+/*    @And("ingreso el firstname, el lastname y el postcode")
+    public void ingreso_el_firstname_el_lastname_y_el_postcode() throws Exception {
+        cartPage.ingresarDatosCheckout();
+    }*/
+
+    @And("ingreso el {string}, el {string} y el {string}")
+    public void ingreso_el_firstname_el_lastname_y_el_postcode(String firstname,String lastname, String postcode) throws Exception {
+        cartPage.ingresarDatosCheckout(firstname,lastname,postcode);
+    }
+
+    @And("el sistema muestra el mensaje de validación {string}")
+    public void el_sistema_muestra_el_mensaje_de_validación(String mensajeEsperado)throws Exception {
+        String mensajeActual = cartPage.obtenerMensajeError();
+        assertEquals("El mensaje de error no coincide", mensajeEsperado, mensajeActual);
+    }
+
+    @And("presionar boton continue")
+    public void presionar_boton_continue() throws Exception {
+        cartPage.irAlContinue();
+    }
+
+    @And("presionar boton finish")
+    public void presionar_boton_finish() throws Exception {
+        cartPage.irAFinish();
+    }
+
+    @And("validar compra de producto")
+    public void validar_compra_de_producto() throws Exception {
+        cartPage.validarCompraProducto();
+    }
+
+
+
 }

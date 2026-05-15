@@ -6,7 +6,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(tags ="@Loginp")
+@CucumberOptions(tags ="@checkout")
 public class RegressionRunner extends WebBaseRunner {
 
 }
